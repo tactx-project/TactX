@@ -1,0 +1,4 @@
+{
+    "train": ["flexi_flexi_spam_latent_TACTX"],
+    "val": ["flexi_flexi_spam_val_latent_TACTX"]
+}

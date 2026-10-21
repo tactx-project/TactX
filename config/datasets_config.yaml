@@ -1,0 +1,55 @@
+dataset_new:
+  dataset_type: 'cross_modal_tri'
+  data_root: 'policy_learning/data/latent_data_new_processed'
+
+  episode_val_split: true
+  # Per-object val ids (front-half + back-half even stride, ~20% each object).
+  val_episode_ids:
+    circle:            [0, 6, 11, 17, 22, 28, 34, 39, 45, 46, 52, 57, 63, 68, 74, 80, 85, 91]
+    cylinder:          [0, 6, 12, 18, 24, 30, 36, 42, 43, 48, 54, 59, 64, 69, 74, 80, 85]
+    cylinder_vertical: [0, 6, 11, 17, 23, 28, 34, 35, 41, 46, 52, 58, 63, 69]
+    ellipse:           [0, 6, 11, 17, 22, 28, 34, 39, 45, 46, 51, 56, 61, 66, 72, 77, 82, 87, 92]
+    large_ball:        [0, 6, 11, 17, 22, 28, 33, 39, 40, 46, 51, 57, 62, 68, 73, 79]
+    plane:             [0, 6, 12, 17, 23, 29, 35, 40, 46, 52, 53, 58, 64, 69, 74, 80, 85, 90, 95, 101, 106]
+    plane_horizontal:  [0, 6, 11, 17, 22, 28, 34, 39, 45, 46, 52, 57, 63, 68, 74, 80, 85, 91]
+    small_ball:        [0, 5, 11, 16, 21, 26, 32, 37, 42, 48, 53, 58, 63, 69, 74, 75, 80, 86, 91, 96, 101, 107, 112, 117, 123, 128, 133, 138, 144, 149]
+    square:            [0, 6, 13, 19, 20, 26, 33, 39]
+    triangle:          [0, 6, 11, 17, 22, 28, 33, 39, 40, 46, 51, 57, 62, 68, 73, 79]
+
+  image_size: 224
+
+  daimon_transforms:
+    - 'resize'
+    - 'normalize'
+  daimon_stats:
+    mean: [0.074812, 0.012717, 0.008024]
+    std:  [0.246311, 0.110200, 0.110444]
+
+  eflesh_transforms:
+    - 'normalize'
+  eflesh_stats:
+    mean: [168.756714, -33.555092, 3.738632, -1997.329468, 133.766037, 575.117249, -3.076847, 2565.997559, -690.754944, -129.409500, -3328.376953, 173.320084, -1363.469116, -35.540630, 28.340805]
+    std:  [1576.587280, 1893.798340, 606.527344, 2767.648193, 663.345093, 1856.128418, 863.060547, 3104.303467, 2374.263916, 1000.755371, 3127.004883, 1633.794800, 2417.779785, 489.083435, 944.870911]
+
+  flexitac_transforms:
+    - 'normalize'
+  flexitac_stats:
+    mean: 0.064869
+    std:  0.160324
+
+  pairs:
+    de:
+      sensor_a: 'daimon'
+      sensor_b: 'eflesh'
+      root:    'de_pair'
+      extra_transforms_a: ['rot180']
+    ef:
+      sensor_a: 'eflesh'
+      sensor_b: 'flexi'
+      root:    'ef_pair'
+      extra_transforms_b: ['rot180']
+    fd:
+      sensor_a: 'flexi'
+      sensor_b: 'daimon'
+      root:    'fd_pair'
+      extra_transforms_b: ['rot180']

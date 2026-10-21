@@ -1,0 +1,55 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# OS/editor noise
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Experiment tracking, logs, and temporary dumps
+wandb/
+*.log
+dump/
+eval_results/
+processed_data/
+data/logs/
+
+# Local datasets and generated dataset derivatives
+tactile_data_new/
+policy_learning/data/
+latent_data/
+latent_data_processed*/
+contact_labels/
+contact_thresholds/
+config/state/
+per_object_stats_dataset*.yaml
+
+# Model checkpoints and large local artifacts
+checkpoints/
+policy_learning/train_logs/
+policy_learning/pretrained_weights/
+_CoRL_2026__Cross_sensor_policy_transfer/
+_CoRL_2026__Cross_sensor_policy_transfer.zip
+*.zip
+
+# Generated visualizations and paper-figure exports
+visualizations/
+vis_latent/
+scripts_vis_paper/
+
+# Local paper/site exports
+related_work_paper/
+paper-template-latex/
+tactx-corl.github.io/
+docs/
+

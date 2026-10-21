@@ -1,0 +1,6 @@
+data/
+checkpoints/
+pretrained_weights/
+build/
+dist/
+*.egg-info/

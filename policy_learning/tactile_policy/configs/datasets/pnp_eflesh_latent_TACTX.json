@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/eflesh_eflesh_object_pnp_latent_TACTX"],
+    "val": ["TACTX/eflesh_eflesh_object_pnp_val_latent_TACTX"]
+}

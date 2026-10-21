@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/dai_dai_plug_insertion_direct_latent_TACTX"],
+    "val": ["TACTX/dai_dai_plug_insertion_direct_val_latent_TACTX"]
+}

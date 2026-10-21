@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/eflesh_eflesh_plug_insertion_direct_latent_TACTX"],
+    "val": ["TACTX/eflesh_eflesh_plug_insertion_direct_val_latent_TACTX"]
+}

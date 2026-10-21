@@ -1,0 +1,11 @@
+data:
+  image_resolution_hw: [240, 320]
+  human_slow_down_factor: 4
+  # mask state/language
+  cond_mask_prob: 0.1
+  predict_delta_action: False
+  # h5py is pretty efficient. This works only marginally for machines with fast disks (~5% improvement)
+  # for NFS-based storage, this is a huge improvement
+  load_hdf_to_cpu: False
+  sampler_type: 'norm_by_embodiment_and_task'
+  num_samples_for_delta_action: 5000

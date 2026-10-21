@@ -1,0 +1,34 @@
+[project]
+name = "tactx-policy"
+version = "0.1.0"
+description = "ACT policy training with TactX tactile representations"
+authors = [{ name = "Wang Lab", email = "riqiu@ucsd.edu" }]
+dependencies = [
+    "torch==2.5.1",
+    "torchvision==0.20.1",
+    "numpy==1.26.4",
+    "PyYAML>=6.0",
+    "tqdm>=4.66.5",
+    "h5py>=3.10",
+    "opencv-python>=4.8,<4.12",
+    "scikit-learn>=1.3",
+    "wandb>=0.16",
+    "omegaconf>=2.3,<3",
+    "accelerate>=1.0,<2",
+    "einops>=0.8",
+    "huggingface-hub>=0.25,<1",
+]
+requires-python = "~=3.11,<3.12"
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tactile_policy*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+tactile_policy = ["configs/*.yaml", "configs/*/*.yaml", "configs/*/*.json", "third_party/detr/LICENSE", "third_party/detr/README.md"]

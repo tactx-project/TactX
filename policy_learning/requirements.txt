@@ -1,0 +1,5 @@
+# Install alongside ../requirements.txt for the ACT workflow.
+omegaconf>=2.3,<3
+accelerate>=1.0,<2
+einops>=0.8
+huggingface-hub>=0.25,<1

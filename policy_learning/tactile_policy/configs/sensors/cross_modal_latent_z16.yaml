@@ -1,0 +1,15 @@
+sensor_type: "cross_modal_latent"
+modality: "array"
+tactile_dim: 16
+
+# tactile img config (unused for array modality, kept for compatibility)
+tactile_backbone: "resnet18"
+tactile_image_feature_strategy: "ACT_linear"
+
+# tactile array config
+lr_tactile_backbone: 1e-4
+tactile_encoding: "mlp"
+tactile_hidden_layers: [64, 128]
+
+spatial_resolution: [1, 16]
+sampling_rate_hz: 100

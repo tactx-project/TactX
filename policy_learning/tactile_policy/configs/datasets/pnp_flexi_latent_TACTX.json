@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/flexi_flexi_object_pnp_latent_TACTX"],
+    "val": ["TACTX/flexi_flexi_object_pnp_val_latent_TACTX"]
+}

@@ -1,0 +1,112 @@
+cross_modal_vae3:
+  # Tri-modal pair-only joint training (Daimon + eFlesh + FlexiTac).
+  # Each step samples one batch from each of de_pair / ef_pair / fd_pair and
+  # optimizes a single combined loss: 3-pair InfoNCE(mu) + 12-branch L1 recon
+  # + 6 KL terms. Shared N(0,I) prior anchors all three modalities into one
+  # latent space; all three pairs have direct alignment supervision.
+  seed: 42
+  batch_size: 64
+  start_epoch: 0
+  epochs: 100
+  learning_rate: 1.0e-4
+
+  # Daimon image encoder (ResNet)
+  resnet: "resnet18"
+
+  # eFlesh magnetic encoder (MLP)
+  magnetic_input_dim: 15
+  magnetic_hidden_dims: [64, 128, 256]
+
+  # FlexiTac encoder/decoder.
+  #
+  # flexitac_arch:
+  #   'small_cnn' (default, omit key for legacy behavior):
+  #       2-conv FlexiTacEncoder + 2-convT FlexiTacDecoder. Uses
+  #       flexitac_encoder_channels / flexitac_pool_* / flexitac_decoder_channels.
+  #       Backward-compatible with all existing cross_modal_vae3 checkpoints.
+  #   'residual':
+  #       Deeper residual CNN (GN+GELU, 3 stages, 2 downsamples).
+  #       For NEW runs only — state_dict differs from small_cnn so old
+  #       checkpoints will fail to load. Useful when FlexiTac recon / probe
+  #       lag the other modalities (a small_cnn capacity bottleneck).
+  #       Tweak via:
+  #           flexitac_encoder_block_channels: [64, 128, 256]
+  #           flexitac_encoder_blocks_per_stage: [2, 2, 2]
+  #           flexitac_decoder_block_channels: [256, 128, 64]
+  #           flexitac_decoder_blocks_per_stage: [2, 2, 2]
+  #           flexitac_gn_groups: 8
+  flexitac_in_h: 12
+  flexitac_in_w: 16
+  flexitac_arch: 'residual'
+  flexitac_encoder_channels: [32, 64]
+  flexitac_pool_h: 6
+  flexitac_pool_w: 8
+  flexitac_decoder_channels: [64, 32]
+  flexitac_out_channels: 1
+
+  # projection head options (each modality outputs 2*projection_dim for (mu, logvar))
+  projection_dim: 16
+
+  # loss options
+  optimizer: "Adam"
+  weight_decay: 1.0e-4
+  temperature: 0.01
+
+  lambda_recon: 1.0
+  beta_max: 0.1
+  kl_warmup_epochs: 30
+
+  # InfoNCE curriculum: reconstruction-first, contrastive-later.
+  # InfoNCE weight α stays 0 until infonce_warmup_start, then linearly
+  # ramps from 0 → 1 over infonce_warmup_epochs.
+  infonce_warmup_start: 0
+  infonce_warmup_epochs: 0
+
+
+  # Daimon decoder
+  image_out_channels: 3
+  image_out_size: 224
+  image_decoder_channels: [256, 128, 64, 32]
+  magnetic_decoder_hidden: [256, 128, 64]
+
+  logistic_batch_size: 256
+  logistic_epochs: 20
+
+cross_modal_clr3:
+  # Tri-modal PLAIN-CONTRASTIVE baseline (Daimon + eFlesh + FlexiTac).
+  # ResNet-18, magnetic MLP, and a legacy small-CNN FlexiTac encoder, with
+  # plain projection heads, NO decoders / NO KL. Each step samples one batch from each of
+  # de_pair / ef_pair / fd_pair and optimizes a single combined loss:
+  # 3-pair NT-Xent contrastive in the shared latent space, applied at full
+  # weight from epoch 0. The lean reconstruction-free baseline.
+  seed: 42
+  batch_size: 64
+  start_epoch: 0
+  epochs: 100
+  learning_rate: 1.0e-4
+
+  # Daimon image encoder (ResNet)
+  resnet: "resnet18"
+
+  # eFlesh magnetic encoder (MLP)
+  magnetic_input_dim: 15
+  magnetic_hidden_dims: [64, 128, 256]
+
+  # FlexiTac small CNN encoder
+  flexitac_in_h: 12
+  flexitac_in_w: 16
+  flexitac_encoder_channels: [32, 64]
+  flexitac_pool_h: 6
+  flexitac_pool_w: 8
+
+  # shared latent space dimension (contrastive projection-head output)
+  projection_dim: 16
+
+  # loss / optimizer
+  optimizer: "Adam"
+  weight_decay: 1.0e-4
+  temperature: 0.03  # NT-Xent temperature
+
+  logistic_batch_size: 256
+  logistic_epochs: 20
+

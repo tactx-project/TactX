@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/flexi_flexi_plug_insertion_direct_latent_TACTX"],
+    "val": ["TACTX/flexi_flexi_plug_insertion_direct_val_latent_TACTX"]
+}

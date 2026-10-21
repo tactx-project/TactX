@@ -1,0 +1,22 @@
+common:
+  policy_class: ACT
+  state_dim: 128
+  action_dim: 128
+  sensor_config: cross_modal_latent_z16
+  camera_names: ['cam0', 'cam1']
+  tactile_names: ['tac0', 'tac1']
+
+model:
+  enc_layers: 4
+  dec_layers: 7
+  nheads: 8
+  hidden_dim: 512
+  kl_weight: 1
+  dim_feedforward: 3200
+  lr_backbone: 1e-4
+  backbone: resnet18
+  image_feature_strategy: ACT_linear
+
+  use_language_conditioning: False
+  num_queries: 64
+  chunk_size: 64

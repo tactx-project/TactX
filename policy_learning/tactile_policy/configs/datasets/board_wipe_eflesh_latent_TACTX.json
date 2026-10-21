@@ -1,0 +1,4 @@
+{
+    "train": ["TACTX/eflesh_eflesh_board_wipe_new_latent_TACTX"],
+    "val": ["TACTX/eflesh_eflesh_board_wipe_new_val_latent_TACTX"]
+}

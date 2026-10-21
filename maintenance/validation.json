@@ -1,0 +1,106 @@
+{
+  "status": "passed",
+  "validated_at_utc": "2026-10-11T12:28:18.368383+00:00",
+  "branch": "refactor/tactx-release-cleanup",
+  "base_commit": "f5d66f82af79def636b4ce3d4e5b6bc78da8f311",
+  "hardware": "CPU only; CUDA unavailable",
+  "data": "Generated pickle recordings and HDF5 episodes, no project datasets or published weights",
+  "python311": {
+    "environment": {
+      "python": "3.11.17",
+      "torch": "2.5.1+cpu",
+      "torchvision": "0.20.1+cpu",
+      "numpy": "1.26.4",
+      "scikit-learn": "1.9.1",
+      "scipy": "1.17.1",
+      "PyYAML": "6.0.3",
+      "h5py": "3.16.0",
+      "wandb": "0.30.0",
+      "simclr": "1.0.1",
+      "accelerate": "1.15.0",
+      "omegaconf": "2.4.0"
+    },
+    "command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -m pytest tests -q",
+    "result": {
+      "tests": 30,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 175.533
+    }
+  },
+  "python310": {
+    "environment": {
+      "python": "3.10.22",
+      "torch": "2.5.1+cpu",
+      "torchvision": "0.20.1+cpu",
+      "numpy": "1.26.4",
+      "scikit-learn": "1.7.2",
+      "scipy": "1.15.3",
+      "PyYAML": "6.0.3",
+      "h5py": "3.16.0",
+      "wandb": "0.30.0",
+      "simclr": "1.0.1"
+    },
+    "command": "OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 python -m pytest tests/test_alignment.py tests/test_repository.py -q",
+    "result": {
+      "tests": 23,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "seconds": 196.382
+    },
+    "final_evaluator_recheck": [
+      "VAE static",
+      "contrastive static",
+      "contact probes and all dynamic episodes"
+    ]
+  },
+  "smoke_training": {
+    "alignment_epochs_per_variant": 1,
+    "alignment_batch_size": 2,
+    "alignment_image_size": [
+      224,
+      224
+    ],
+    "variants": [
+      "TactX",
+      "reconstruction plus KL",
+      "contrastive-only",
+      "L2 plus reconstruction plus KL"
+    ],
+    "act_training_steps": 2,
+    "act_batch_size": 1,
+    "act_chunk_size": 4,
+    "act_config": "act_cross_modal_pnp_z16",
+    "act_backbone_initialization": "Random for offline test; normal default is ImageNet",
+    "act_resume_checkpoint_step": 1
+  },
+  "other_checks": {
+    "ruff_F821_F822_F823_E9": "passed",
+    "git_diff_check": "passed",
+    "pip_check_python310": "passed",
+    "pip_check_python311": "passed",
+    "all_30_release_modules_import": "passed",
+    "wheel_build": "passed",
+    "wheel_includes_all_12_dataset_configs_and_DETR_license": "passed",
+    "wheel_import_and_config_lookup_outside_repository": "passed",
+    "base_paths_accounted_for": 331,
+    "removed_paths": 274,
+    "renamed_paths": 39,
+    "tracked_files_after_cleanup": 66,
+    "DETR_license_unchanged": true,
+    "excluded_local_docs_and_paper_visualizations_tracked": false
+  },
+  "warnings": "The pinned SimCLR dependency calls torchvision using the deprecated pretrained argument; tests pass with torch 2.5.1 / torchvision 0.20.1.",
+  "not_validated": [
+    "CUDA",
+    "mixed precision",
+    "distributed GPU execution",
+    "full-duration research training",
+    "real dataset metrics",
+    "published checkpoints",
+    "robot deployment and success rates"
+  ],
+  "published_results_reproduced": false
+}

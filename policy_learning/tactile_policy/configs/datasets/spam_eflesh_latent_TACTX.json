@@ -1,0 +1,4 @@
+{
+    "train": ["eflesh_eflesh_spam_latent_TACTX"],
+    "val": ["eflesh_eflesh_spam_val_latent_TACTX"]
+}
